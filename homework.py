@@ -71,11 +71,11 @@ class Running(Training):
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий при беге."""
         calories = ((self.coeff_calorie_1
-                    * self.get_mean_speed()
+                    *self.get_mean_speed()
                     - self.coeff_calorie_2)
-                    * self.weight
-                    / self.M_IN_KM
-                    * self.duration * 60)
+                    *self.weight
+                    /self.M_IN_KM
+                    *self.duration*60)
         return calories
 
 
@@ -130,8 +130,7 @@ class Swimming(Training):
                         self.length_pool
                         * self.count_pool
                         / self.M_IN_KM
-                        / self.duration
-                        )
+                        / self.duration)
         return average_speed
 
     def get_spent_calories(self) -> float:
@@ -155,7 +154,7 @@ def read_package(workout_type: str, data: list) -> Training:
 
 
 def main(training: Training) -> None:
-    """Главная функция."""  
+    """Главная функция."""
     info = training.show_training_info().get_message()
     print(info)
 
@@ -170,4 +169,3 @@ if __name__ == '__main__':
     for workout_type, data in packages:
         training = read_package(workout_type, data)
         main(training)
-    
