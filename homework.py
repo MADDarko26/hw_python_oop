@@ -39,24 +39,20 @@ class Training:
 
     def get_distance(self) -> float:
         """Получить дистанцию в км."""
-
         dist = self.action * self.LEN_STEP / self.M_IN_KM
         return dist
 
     def get_mean_speed(self) -> float:
         """Получить среднюю скорость движения."""
-
         dist = self.get_distance()
         return dist / self.duration
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-
-        print('Расчет каллорий')
+        raise NotImplementedError
 
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
-
         return InfoMessage(self.__class__.__name__,
                            self.duration,
                            self.get_distance(),
@@ -72,7 +68,6 @@ class Running(Training):
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий при беге."""
-
         calories = ((self.COEFF_CALORIE_1
                      * self.get_mean_speed()
                      - self.COEFF_CALORIE_2)
@@ -100,7 +95,6 @@ class SportsWalking(Training):
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий при спортивной ходьбе."""
-
         calories = ((self.COEFF_CALORIE_1
                      * self.weight
                      + (self.get_mean_speed()**2
@@ -132,7 +126,6 @@ class Swimming(Training):
 
     def get_mean_speed(self) -> float:
         """Получить среднюю скорость при плавании."""
-
         average_speed = (self.length_pool
                          * self.count_pool
                          / self.M_IN_KM
@@ -141,7 +134,6 @@ class Swimming(Training):
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий при плавании."""
-
         calories = ((self.get_mean_speed()
                     + self.COEFF_CALORIE_1) * 2
                     * self.weight)
@@ -150,7 +142,6 @@ class Swimming(Training):
 
 def read_package(workout_type: str, data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
-
     class_data = {
         "SWM": Swimming,
         "RUN": Running,
@@ -164,7 +155,6 @@ def read_package(workout_type: str, data: list) -> Training:
 
 def main(training: Training) -> None:
     """Главная функция."""
-
     info = training.show_training_info().get_message()
     print(info)
 
